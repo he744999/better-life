@@ -63,6 +63,7 @@ void setup() {
   delay(10);
   pinMode(PIN, OUTPUT);
   pinMode(PIN2, OUTPUT);
+
   Serial.println(F("Adafruit MQTT demo"));
 
   // Connect to WiFi access point.
@@ -79,14 +80,7 @@ void setup() {
 
   Serial.println("WiFi connected");
   Serial.println("IP address: "); Serial.println(WiFi.localIP());
-
-  // Setup MQTT subscription for onoff feed.
-  mqtt.subscribe(&onoffbutton);
-}
-
-uint32_t x=0;
-
-void loop() {
+ bdigitalWrite(PIN, HIGH );
   // Ensure the connection to the MQTT server is alive (this will make the first
   // connection and automatically reconnect when disconnected).  See the MQTT_connect
   // function definition further below.
@@ -105,13 +99,13 @@ void loop() {
       if(p == 'n')
       { 
         Serial.println("on");
-        digitalWrite(PIN, HIGH);
+        //digitalWrite(PIN, HIGH);
         digitalWrite(PIN2, HIGH);
       }
       if(p == 'f')
       {
         Serial.println("off");
-        digitalWrite(PIN, LOW );
+        //digitalWrite(PIN, LOW );
         digitalWrite(PIN2, LOW );
       }
     }
