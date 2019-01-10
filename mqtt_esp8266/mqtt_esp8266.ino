@@ -21,8 +21,8 @@
 
 /************************* WiFi Access Point *********************************/
 
-#define WLAN_SSID       "@PHICOMM_74"
-#define WLAN_PASS       "01011234#"
+#define WLAN_SSID       "ChinaNet-F4C6"
+#define WLAN_PASS       "29xqyyjr"
 
 /************************* Adafruit.io Setup *********************************/
 
@@ -30,6 +30,7 @@
 #define AIO_SERVERPORT  1883                   // use 8883 for SSL
 #define AIO_USERNAME    "pomelo744"
 #define AIO_KEY         "e81c015454f148d29142edb6ce097379"
+
 
 #define PIN D4
 #define PIN2 D3
@@ -63,7 +64,6 @@ void setup() {
   delay(10);
   pinMode(PIN, OUTPUT);
   pinMode(PIN2, OUTPUT);
-
   Serial.println(F("Adafruit MQTT demo"));
 
   // Connect to WiFi access point.
@@ -80,7 +80,15 @@ void setup() {
 
   Serial.println("WiFi connected");
   Serial.println("IP address: "); Serial.println(WiFi.localIP());
- bdigitalWrite(PIN, HIGH );
+
+  // Setup MQTT subscription for onoff feed.
+  mqtt.subscribe(&onoffbutton);
+  digitalWrite(PIN, HIGH);
+}
+
+uint32_t x=0;
+
+void loop() {
   // Ensure the connection to the MQTT server is alive (this will make the first
   // connection and automatically reconnect when disconnected).  See the MQTT_connect
   // function definition further below.
